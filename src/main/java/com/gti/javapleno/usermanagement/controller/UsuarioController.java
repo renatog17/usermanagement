@@ -17,6 +17,8 @@ import com.gti.javapleno.usermanagement.controller.dto.UsuarioPostDTO;
 import com.gti.javapleno.usermanagement.domain.Usuario;
 import com.gti.javapleno.usermanagement.service.UsuarioService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/users")
 public class UsuarioController {
@@ -37,7 +39,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioGetDTO> createUser(@RequestBody UsuarioPostDTO usuarioPostDTO, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<UsuarioGetDTO> createUser(@RequestBody @Valid UsuarioPostDTO usuarioPostDTO, UriComponentsBuilder uriComponentsBuilder) {
         Usuario usuario = usuarioService.createUser(usuarioPostDTO);
         UsuarioGetDTO usuarioGetDTO = new UsuarioGetDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getDataCadastro());
     
